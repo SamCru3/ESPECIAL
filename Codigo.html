@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¿Quieres ser mi novia? 💕</title>
+  <style>
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #0f0f0f;
+      color: white;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
+      margin: 0;
+    }
+
+    .container {
+      text-align: center;
+      padding: 20px;
+      z-index: 10;
+      position: relative;
+    }
+
+    .sticker {
+      width: 140px;
+      max-width: 100%;
+      margin-bottom: 20px;
+      animation: bounce 1.5s infinite;
+      border-radius: 15px;
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-12px);
+      }
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 30px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .buttons-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      font-size: 16px;
+      padding: 12px 28px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.2s ease, font-size 0.2s ease;
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    .yes-button {
+      background: #ff4d6d;
+      color: white;
+      z-index: 2;
+    }
+
+    .yes-button:hover {
+      background: #ff3355;
+    }
+
+    .no-button {
+      background: #444;
+      color: white;
+    }
+
+    .no-button:hover {
+      background: #555;
+    }
+
+    /* Estilos para la pantalla de éxito con animación avanzada */
+    .success-container {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      z-index: 10;
+      animation: fadeIn 0.8s ease forwards;
+    }
+
+    .success-container h1 {
+      font-size: 2.5rem;
+      color: #ff4d6d;
+      margin-bottom: 15px;
+      text-shadow: 0 0 20px rgba(255, 77, 109, 0.5);
+    }
+
+    .success-container p {
+      font-size: 1.2rem;
+      color: #ddd;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* Elementos flotantes de corazones */
+    .heart {
+      position: absolute;
+      font-size: 24px;
+      user-select: none;
+      pointer-events: none;
+      animation: floatUp 2.5s linear forwards;
+      z-index: 5;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(0.6) rotate(0deg);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(-200px) scale(1.2) rotate(15deg);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-450px) scale(1.5) rotate(-15deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Contenedor Principal de la Pregunta -->
+  <div class="container" id="mainContainer">
+    <img class="sticker" id="sticker" src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" alt="sticker tierno" />
+    <h2 id="questionText">¿Quieres ser mi novia? 💕</h2>
+    <div class="buttons-wrapper">
+      <button class="yes-button" id="yesBtn" onclick="handleYesClick()">Sí</button>
+      <button class="no-button" id="noBtn" onclick="handleNoClick()">No</button>
+    </div>
+  </div>
+
+  <!-- Contenedor de Éxito (Oculto al inicio) -->
+  <div class="success-container" id="successContainer">
+    <img class="sticker" src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" alt="sticker feliz" />
+    <h1>¡SABÍA QUE DIRÍAS QUE SÍ! 💖</h1>
+    <p>Has hecho que este sea el momento más feliz de mi vida.</p>
+  </div>
+
+  <script>
+    const messages = [
+      "¿No? 😒",
+      "¿Estás segura?",
+      "Piénsalo bien...",
+      "¿Última oportunidad? 🥺",
+      "¡Ya no te dejo decir que no! 😌"
+    ];
+
+    const stickerImages = [
+      "https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif",
+      "https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif",
+      "https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif"
+    ];
+
+    let messageIndex = 0;
+    let stickerIndex = 0;
+
+    const noButton = document.getElementById("noBtn");
+    const yesButton = document.getElementById("yesBtn");
+    const sticker = document.getElementById("sticker");
+    const mainContainer = document.getElementById("mainContainer");
+    const successContainer = document.getElementById("successContainer");
+
+    function handleNoClick() {
+      // Cambiar texto del botón No
+      noButton.textContent = messages[messageIndex];
+      messageIndex = (messageIndex + 1) % messages.length;
+
+      // Cambiar sticker de forma cíclica
+      stickerIndex = (stickerIndex + 1) % stickerImages.length;
+      sticker.src = stickerImages[stickerIndex];
+
+      // Hacer que el botón de Sí crezca progresivamente de forma atractiva
+      const currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
+      const currentPaddingV = parseFloat(window.getComputedStyle(yesButton).paddingTop);
+      const currentPaddingH = parseFloat(window.getComputedStyle(yesButton).paddingLeft);
+
+      yesButton.style.fontSize = `${currentSize * 1.25}px`;
+      yesButton.style.padding = `${currentPaddingV * 1.15}px ${currentPaddingH * 1.15}px`;
+    }
+
+    function handleYesClick() {
+      // Ocultar la pregunta y mostrar la pantalla de éxito con transición
+      mainContainer.style.display = "none";
+      successContainer.style.display = "flex";
+
+      // Lanzar ráfaga masiva de corazones iniciales
+      for (let i = 0; i < 35; i++) {
+        setTimeout(() => {
+          createHeart();
+        }, i * 50);
+      }
+
+      // Mantener generando corazones durante unos segundos más
+      let heartInterval = setInterval(() => {
+        createHeart();
+      }, 300);
+
+      setTimeout(() => {
+        clearInterval(heartInterval);
+      }, 4000);
+    }
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      
+      const heartEmojis = ["💖", "💗", "💓", "💘", "❤️", "✨"];
+      heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+
+      heart.style.left = Math.random() * window.innerWidth + "px";
+      heart.style.bottom = "-30px";
+      
+      const size = Math.random() * 20 + 16;
+      heart.style.fontSize = `${size}px`;
+      
+      const duration = Math.random() * 1.5 + 2;
+      heart.style.animationDuration = `${duration}s`;
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, duration * 1000);
+    }
+  </script>
+</body>
+</html>
