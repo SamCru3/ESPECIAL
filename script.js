@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    // --- Navegación por Pestañas (Tabs) ---
+    // NAV
     const botonesNav = document.querySelectorAll(".btnNav");
     const secciones = document.querySelectorAll(".tab-content");
 
@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // --- Lista de Canciones del Reproductor ---
+    // MUSICA
     const canciones = [
         {
             titulo: "Niña Primavera",
@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
         audioPlayer.addEventListener("ended", () => cambiarCancion(true));
     }
 
-    // --- Indicadores de Desplazamiento en la Barra de Navegación ---
+    // NAV2
     const navUl = document.querySelector("nav ul");
     const fadeLeft = document.querySelector(".nav-fade.left");
     const fadeRight = document.querySelector(".nav-fade.right");
@@ -207,13 +207,13 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // --- Lluvia Dinámica de Frases en el Fondo ---
+    // Mensajes del fondo
     const contenedorLluvia = document.getElementById("lluvia-fondo");
 
     if (contenedorLluvia) {
         const palabras = [
-            "Laurent", "Andrea", "01/09", "Hermosa", 
-            "Mi persona favorita", "Te amo", "USB", "Sonrisa"
+            "Laurent", "Andrea", "Hermosa", "Princesa", "Te Quiero",
+            "Mi persona favorita", "Te amo"
         ];
 
         function crearElementoLluvia() {
